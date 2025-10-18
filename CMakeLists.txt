@@ -16,7 +16,11 @@ add_executable(cymbalamp
 )
 
 # Add pico_stdlib library which aggregates commonly used features
-target_link_libraries(cymbalamp pico_stdlib)
+target_link_libraries(cymbalamp pico_stdlib hardware_adc)
+
+# Enable reading prints (picocom -b 115200 /dev/ttyACM0)
+pico_enable_stdio_usb(cymbalamp 1)
+pico_enable_stdio_uart(cymbalamp 0)
 
 # create map/bin/hex/uf2 file in addition to ELF.
 pico_add_extra_outputs(cymbalamp)
