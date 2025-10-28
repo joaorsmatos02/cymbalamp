@@ -39,11 +39,11 @@ int main() {
         sleep_ms(100);
         uint16_t result = adc_read();
         printf("%d\n", result);
-        if(result > 2000){
+        if(result > 40){
             led = !led;
             pico_set_led(led);
             int i;
-            while((i = adc_read()) > 500){
+            while((i = adc_read()) > 15){
                 sleep_ms(100);
                 printf("%d\n", i);
             }
