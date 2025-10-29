@@ -3,45 +3,39 @@
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
 
-#ifndef LED_DELAY_MS
-#define LED_DELAY_MS 250
+#ifndef SENSOR_PIN
+#define SENSOR_PIN 28
 #endif
 
+#ifndef SENSOR_PIN_2
+#define SENSOR_PIN_2 2
+#endif
 
-int pico_led_init(void) {
-    // A device like Pico that uses a GPIO for the LED will define PICO_DEFAULT_LED_PIN
-    // so we can use normal GPIO functionality to turn the led on and off
-    gpio_init(PICO_DEFAULT_LED_PIN);
-    gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
-    return PICO_OK;
-}
-
-void pico_set_led(bool led_on) {
-    // Just set the GPIO on or off
-    gpio_put(PICO_DEFAULT_LED_PIN, led_on);
-}
+#ifndef RELAY_PIN
+#define RELAY_PIN 0
+#endif
 
 void init() {
     stdio_init_all();
-    pico_led_init();
     adc_init();
-
-    // Make sure GPIO is high-impedance, no pullups etc
-    adc_gpio_init(28);
-    // Select ADC input 0 (GPIO26)
-    adc_select_input(2);
+    // analog digital converter (vibration sensor)
+    adc_gpio_init(SENSOR_PIN);
+    adc_select_input(SENSOR_PIN_2);
+    // relay
+    gpio_init(RELAY_PIN);
+    gpio_set_dir(RELAY_PIN, GPIO_OUT);
 }
 
 int main() {
     init();
-    int led = 0;
+    int led = 1;
     do {
         sleep_ms(100);
         uint16_t result = adc_read();
         printf("%d\n", result);
         if(result > 40){
             led = !led;
-            pico_set_led(led);
+            gpio_put(RELAY_PIN, led);
             int i;
             while((i = adc_read()) > 15){
                 sleep_ms(100);
@@ -49,4 +43,5 @@ int main() {
             }
         }
     } while(1);
+    return 0;
 }
