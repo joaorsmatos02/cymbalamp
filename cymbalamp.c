@@ -11,8 +11,8 @@
 #define SENSOR_PIN_2 2
 #endif
 
-#ifndef RELAY_PIN
-#define RELAY_PIN 0
+#ifndef MOSFET_PIN
+#define MOSFET_PIN 0
 #endif
 
 void init() {
@@ -21,9 +21,9 @@ void init() {
     // analog digital converter (vibration sensor)
     adc_gpio_init(SENSOR_PIN);
     adc_select_input(SENSOR_PIN_2);
-    // relay
-    gpio_init(RELAY_PIN);
-    gpio_set_dir(RELAY_PIN, GPIO_OUT);
+    // mosfet
+    gpio_init(MOSFET_PIN);
+    gpio_set_dir(MOSFET_PIN, GPIO_OUT);
 }
 
 int main() {
@@ -35,7 +35,7 @@ int main() {
         printf("%d\n", result);
         if(result > 40){
             led = !led;
-            gpio_put(RELAY_PIN, led);
+            gpio_put(MOSFET_PIN, led);
             int i;
             while((i = adc_read()) > 15){
                 sleep_ms(100);
