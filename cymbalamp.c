@@ -3,6 +3,10 @@
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
 
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 #ifndef SENSOR_PIN
 #define SENSOR_PIN 28
 #endif
@@ -32,14 +36,18 @@ int main() {
     do {
         sleep_ms(100);
         uint16_t result = adc_read();
-        printf("%d\n", result);
-        if(result > 40){
+        if(DEBUG) {
+            printf("awaiting bang: %d\n", result);
+        }
+        if(result < 300){
             led = !led;
             gpio_put(MOSFET_PIN, led);
             int i;
-            while((i = adc_read()) > 15){
+            while((i = adc_read()) < 500){
                 sleep_ms(100);
-                printf("%d\n", i);
+                if(DEBUG){
+                    printf("awaiting cooldown: %d\n", i);
+                }
             }
         }
     } while(1);
