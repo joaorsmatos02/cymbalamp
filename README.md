@@ -1,6 +1,7 @@
 # cymbalamp
 
 A C program for a cymbal lamp. Made for the Raspberry Pi Pico.
+
 This project came into reality after finding a makeshift lamp for sale online, using an old cymbal and its stand. After realizing how cool it would be to have it turn on and off by hitting the cymbal, we decided to rebuild the circuit to make that possible. We achieved it by incorporating a Raspberry Pi Pico running the code in this repo, connected to a vibration sensor and a mosfet to switch the lamp when vibration is detected. Despite being a cool gimmick, it is a bit finicky, so a switch was added alongside the main power switch, that cuts off the Pico part of the circuit, making it behave as a normal lamp. If you wish to recreate this project, here is a material list and circuit diagrams.
 
 ## Circuit Diagram (Raspberry Pi Pico + 24 V Load)
