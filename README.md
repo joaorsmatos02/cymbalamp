@@ -81,7 +81,7 @@ Notes:
 
  [ Vibration / Piezo Sensor ]
   |
-  +---- GPIO 28 (ADC2) ----- < 3.3V ---+ MOSFET
+  +---- GPIO 28 (ADC2) ----- ( send < 3.3V ---+ Gate (NMOS) via GPIO 0 ) 
   |
  GND
 ```
