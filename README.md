@@ -23,7 +23,7 @@ This project came into reality after finding a makeshift lamp for sale online, u
               |
               |
           +--------+
-          | LOAD   |   Solenoid / Lamp / Relay
+          | LOAD   |   Solenoid / Lamp 
           +--------+
               |
               |--------------------+
@@ -37,7 +37,7 @@ This project came into reality after finding a makeshift lamp for sale online, u
               |                   GND
               |
         ┌───────────────┐
-        │ Flyback Diode │  (Required for inductive loads)
+        │ Flyback Diode │  (Polarity Protection)
         └─────|<|──────┘
               |
              +24V
@@ -78,16 +78,13 @@ Notes:
 ### Sensor (ADC Input)
 
 ```text
-+3.3V (or +5V*)
-  |
+
  [ Vibration / Piezo Sensor ]
   |
-  +---- GPIO 28 (ADC2)
+  +---- GPIO 28 (ADC2) ----- < 3.3V ---+ MOSFET
   |
  GND
 ```
-Notes:
-- If sensor outputs >3.3 V, use a voltage divider before GPIO 28.
 
 ## Mermaid diagram
 
