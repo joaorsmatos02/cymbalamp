@@ -107,6 +107,6 @@ flowchart TB
     GATE --> RPD["100kΩ Pull-down"]
     RPD --> GND
 
-    SENSOR["Vibration Sensor"] -->|OUT| ADC["GPIO 28 (ADC2)"]
+    SENSOR["Vibration Sensor"] -->|"GPIO 28 (ADC2)"| PICO
     SENSOR --> GND
 ```
