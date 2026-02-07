@@ -33,7 +33,6 @@ void init() {
 int main() {
     init();
     int led = 0; // start turned off
-    gpio_put(MOSFET_PIN, led);
     do {
         sleep_ms(100);
         uint16_t result = adc_read();
